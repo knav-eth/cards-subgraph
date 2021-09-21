@@ -1,0 +1,26 @@
+specVersion: 0.0.2
+description: AdventureCards
+repository: https://github.com/knav-eth/adventure-cards
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: AdventureCards
+    network: mainnet
+    source:
+      address: '0x329fd5e0d9aad262b13ca07c87d001bec716ed39'
+      abi: AdventureCards
+      startBlock: 13253270
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - AdventureCardsImage
+      abis:
+        - name: AdventureCards
+          file: ./abis/AdventureCards.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts

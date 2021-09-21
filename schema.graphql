@@ -1,0 +1,8 @@
+type AdventureCardPack @entity {
+    id: ID!
+    numericId: Int!
+    owner: Bytes!
+    name: String!
+    metadata: String!
+    cards: [String!]!
+}
