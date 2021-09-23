@@ -154,13 +154,13 @@ export class Wallet extends Entity {
     this.set("packs", Value.fromStringArray(value));
   }
 
-  get bagsHeld(): BigInt {
-    let value = this.get("bagsHeld");
+  get heldCount(): BigInt {
+    let value = this.get("heldCount");
     return value.toBigInt();
   }
 
-  set bagsHeld(value: BigInt) {
-    this.set("bagsHeld", Value.fromBigInt(value));
+  set heldCount(value: BigInt) {
+    this.set("heldCount", Value.fromBigInt(value));
   }
 
   get joined(): BigInt {

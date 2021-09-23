@@ -13,7 +13,7 @@ type Wallet @entity {
     id: ID!
     address: Bytes!
     packs: [AdventureCardPack!]! @derivedFrom(field: "currentOwner")
-    bagsHeld: BigInt!
+    heldCount: BigInt!
     joined: BigInt!
 }
 

@@ -13,11 +13,11 @@ export function handleTransfer(event: TransferEvent): void {
     fromWallet = new Wallet(fromId)
     fromWallet.address = fromAddress
     fromWallet.joined = event.block.timestamp
-    fromWallet.bagsHeld = BigInt.fromI32(0)
+    fromWallet.heldCount = BigInt.fromI32(0)
     fromWallet.save()
   } else {
     if (!isZeroAddress(fromId)) {
-      fromWallet.bagsHeld = fromWallet.bagsHeld.minus(BigInt.fromI32(1))
+      fromWallet.heldCount = fromWallet.heldCount.minus(BigInt.fromI32(1))
       fromWallet.save()
     }
   }
@@ -28,10 +28,10 @@ export function handleTransfer(event: TransferEvent): void {
     toWallet = new Wallet(toId)
     toWallet.address = toAddress
     toWallet.joined = event.block.timestamp
-    toWallet.bagsHeld = BigInt.fromI32(1)
+    toWallet.heldCount = BigInt.fromI32(1)
     toWallet.save()
   } else {
-    toWallet.bagsHeld = toWallet.bagsHeld.plus(BigInt.fromI32(1))
+    toWallet.heldCount = toWallet.heldCount.plus(BigInt.fromI32(1))
     toWallet.save()
   }
 
