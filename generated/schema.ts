@@ -51,6 +51,15 @@ export class AdventureCardPack extends Entity {
     this.set("numericId", Value.fromI32(value));
   }
 
+  get name(): string {
+    let value = this.get("name");
+    return value.toString();
+  }
+
+  set name(value: string) {
+    this.set("name", Value.fromString(value));
+  }
+
   get owner(): Bytes {
     let value = this.get("owner");
     return value.toBytes();
@@ -60,13 +69,22 @@ export class AdventureCardPack extends Entity {
     this.set("owner", Value.fromBytes(value));
   }
 
-  get name(): string {
-    let value = this.get("name");
+  get currentOwner(): string {
+    let value = this.get("currentOwner");
     return value.toString();
   }
 
-  set name(value: string) {
-    this.set("name", Value.fromString(value));
+  set currentOwner(value: string) {
+    this.set("currentOwner", Value.fromString(value));
+  }
+
+  get minted(): BigInt {
+    let value = this.get("minted");
+    return value.toBigInt();
+  }
+
+  set minted(value: BigInt) {
+    this.set("minted", Value.fromBigInt(value));
   }
 
   get metadata(): string {
@@ -85,5 +103,148 @@ export class AdventureCardPack extends Entity {
 
   set cards(value: Array<string>) {
     this.set("cards", Value.fromStringArray(value));
+  }
+}
+
+export class Wallet extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Wallet entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Wallet entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Wallet", id.toString(), this);
+  }
+
+  static load(id: string): Wallet | null {
+    return store.get("Wallet", id) as Wallet | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get address(): Bytes {
+    let value = this.get("address");
+    return value.toBytes();
+  }
+
+  set address(value: Bytes) {
+    this.set("address", Value.fromBytes(value));
+  }
+
+  get packs(): Array<string> {
+    let value = this.get("packs");
+    return value.toStringArray();
+  }
+
+  set packs(value: Array<string>) {
+    this.set("packs", Value.fromStringArray(value));
+  }
+
+  get bagsHeld(): BigInt {
+    let value = this.get("bagsHeld");
+    return value.toBigInt();
+  }
+
+  set bagsHeld(value: BigInt) {
+    this.set("bagsHeld", Value.fromBigInt(value));
+  }
+
+  get joined(): BigInt {
+    let value = this.get("joined");
+    return value.toBigInt();
+  }
+
+  set joined(value: BigInt) {
+    this.set("joined", Value.fromBigInt(value));
+  }
+}
+
+export class Transfer extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Transfer entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Transfer entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Transfer", id.toString(), this);
+  }
+
+  static load(id: string): Transfer | null {
+    return store.get("Transfer", id) as Transfer | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get pack(): string {
+    let value = this.get("pack");
+    return value.toString();
+  }
+
+  set pack(value: string) {
+    this.set("pack", Value.fromString(value));
+  }
+
+  get from(): string {
+    let value = this.get("from");
+    return value.toString();
+  }
+
+  set from(value: string) {
+    this.set("from", Value.fromString(value));
+  }
+
+  get to(): string {
+    let value = this.get("to");
+    return value.toString();
+  }
+
+  set to(value: string) {
+    this.set("to", Value.fromString(value));
+  }
+
+  get txHash(): Bytes {
+    let value = this.get("txHash");
+    return value.toBytes();
+  }
+
+  set txHash(value: Bytes) {
+    this.set("txHash", Value.fromBytes(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
   }
 }

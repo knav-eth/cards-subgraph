@@ -17,6 +17,7 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - AdventureCardsImage
+        - Transfer
       abis:
         - name: AdventureCards
           file: ./abis/AdventureCards.json

@@ -1,8 +1,42 @@
 type AdventureCardPack @entity {
     id: ID!
     numericId: Int!
-    owner: Bytes!
     name: String!
+    owner: Bytes!
+    currentOwner: Wallet!
+    minted: BigInt!
     metadata: String!
     cards: [String!]!
+}
+
+type _Schema_
+@fulltext(
+    name: "search"
+    language: en
+    algorithm: rank
+    include: [
+        {
+            entity: "AdventureCardPack"
+            fields: [
+                { name: "cards" }
+            ]
+        }
+    ]
+)
+
+type Wallet @entity {
+    id: ID!
+    address: Bytes!
+    packs: [AdventureCardPack!]! @derivedFrom(field: "currentOwner")
+    bagsHeld: BigInt!
+    joined: BigInt!
+}
+
+type Transfer @entity {
+    id: ID!
+    pack: AdventureCardPack!
+    from: Wallet!
+    to: Wallet!
+    txHash: Bytes!
+    timestamp: BigInt!
 }
