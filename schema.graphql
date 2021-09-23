@@ -9,21 +9,6 @@ type AdventureCardPack @entity {
     cards: [String!]!
 }
 
-type _Schema_
-@fulltext(
-    name: "search"
-    language: en
-    algorithm: rank
-    include: [
-        {
-            entity: "AdventureCardPack"
-            fields: [
-                { name: "cards" }
-            ]
-        }
-    ]
-)
-
 type Wallet @entity {
     id: ID!
     address: Bytes!
